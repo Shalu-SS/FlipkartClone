@@ -1,0 +1,1 @@
+from .user import user as user_blueprint

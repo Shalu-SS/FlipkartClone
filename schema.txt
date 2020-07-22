@@ -1,0 +1,19 @@
+User tabel : id, email, password, mobile no, role
+user_address table: id, user_id, address
+
+Orders table: id, user_id, total price, order status
+ord detais table: order id, product id, price
+
+products tabel:id, name, price
+product meta:id, produt id, description, category_id, votes
+prod comments:id, product_id, comment
+
+categories table: id, category name
+sub category table:id, category id, subcategory name
+
+cart table: id, user id, total price
+cart details table: cart id, product id, price
+
+wishlist table: user id, product id, product name
+
+payment table: id, order id, order total price, status
