@@ -5,14 +5,13 @@ Orders table: id, user_id, total price, order status
 ord detais table: order id, product id, price
 
 products tabel:id, name, price
-product meta:id, produt id, description, category_id, votes
+product meta:id, produt id, description, category_id, votes, image urls
 prod comments:id, product_id, comment
 
 categories table: id, category name
-sub category table:id, category id, subcategory name
 
 cart table: id, user id, total price
-cart details table: cart id, product id, price
+cart details table: cart id, product id, price, qty
 
 wishlist table: user id, product id, product name
 
