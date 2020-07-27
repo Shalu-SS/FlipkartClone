@@ -11,6 +11,7 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:omkar@localhost/FlipcartCloneApp"
 
     app.register_blueprint(user_blueprint, url_prefix="/user")
+    app.register_blueprint(category_blueprint, url_prefix="/category")
 
     db.init_app(app)
 

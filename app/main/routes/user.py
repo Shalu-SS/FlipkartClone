@@ -26,12 +26,13 @@ def new_user():
         db.session.add(user)
         db.session.commit()
         try:
+            # If address is given during registeration add it otherwise pass
             useraddress = UserAddressModel(user_id=request.json["id"], address=request.json["address"])
             db.session.add(useraddress)
             db.session.commit()
         except:
             pass    
-        return 'user added'
+        return {"result":"success", "message":'user added'}
     except Exception as e:
         return  str(e)
 
@@ -71,7 +72,7 @@ def userlist():
         return json.dumps(res[1])
 
     if res[2] != "admin":
-        return {"result":"failed", "message":"admin access required"}    
+        return {"access":"denied", "message":"admin access required"}    
         
     result = db.session.execute("SELECT users.id, users.email, users.role, users.mobileNum, GROUP_CONCAT(useraddress.address) FROM users left join useraddress on users.id = useraddress.user_id group by 1, 2, 3, 4 order by users.id")
     data = []
