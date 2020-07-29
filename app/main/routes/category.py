@@ -38,9 +38,9 @@ def prod_list(id):
         return {"error":"no such category"}
     data = []
 
-    query = '''SELECT products.id, products.name FROM products JOIN productsmeta ON products.id=productsmeta.product_id WHERE productsmeta.category_id=%d''' %int(id)
-    for id, name in db.session.execute(query):
-        data.append({"product id":id, "product name":name})
+    query = '''SELECT products.id, products.name, productsmeta.img_urls, products.price FROM products JOIN productsmeta ON products.id=productsmeta.product_id WHERE productsmeta.category_id=%d''' %int(id)
+    for instance in db.session.execute(query):
+        data.append({"product id":instance.id, "product name":instance.name, "img_url":instance.img_urls, "price":instance.price})
 
     return {"category id":id, "category name":cat_name, "product list":data}
 
