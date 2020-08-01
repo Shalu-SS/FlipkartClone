@@ -44,8 +44,8 @@ def prod_list(id):
 
     return {"category id":id, "category name":cat_name, "product list":data}
 
-@category.route('/add_products/<id>', methods=["PUT"])
-def add_prod(id):
+@category.route('/add_products/<cat_id>', methods=["PUT"])
+def add_prod(cat_id):
     res = validate(request.json["auth_token"])
     if not res[0]:
         return json.dumps(res[1])
@@ -53,7 +53,7 @@ def add_prod(id):
         return {"access":"denied", "message":"admin or owner access required"}
     
     try:
-        cat_name = db.session.query(CategoryModel.name).filter_by(id=id).all()[0][0]
+        cat_name = db.session.query(CategoryModel.name).filter_by(id=cat_id).all()[0][0]
     except:
         return {"error":"no such category"}
 
@@ -62,7 +62,7 @@ def add_prod(id):
     db.session.commit()
 
     prod_id = db.session.query(ProductModel.id).filter_by(name=request.json["name"]).all()[0][0]
-    productmeta = ProductsMetaModel(product_id=prod_id, description=request.json["description"], category_id=id, rating=request.json["rating"], img_urls=request.json["img_urls"], numOfComments=request.json["numOfComments"])
+    productmeta = ProductsMetaModel(product_id=prod_id, description=request.json["description"], category_id=cat_id, rating=request.json["rating"], img_urls=request.json["img_urls"], numOfComments=request.json["numOfComments"])
     db.session.add(productmeta)
     db.session.commit()
 
