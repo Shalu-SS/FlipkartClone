@@ -13,6 +13,7 @@ def create_app():
     app.register_blueprint(user_blueprint, url_prefix="/user")
     app.register_blueprint(category_blueprint, url_prefix="/category")
     app.register_blueprint(product_blueprint, url_prefix="/product")
+    app.register_blueprint(cart_blueprint, url_prefix="/cart")
 
     db.init_app(app)
 

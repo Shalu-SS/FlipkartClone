@@ -43,14 +43,14 @@ def login():
         data = []
         for row in result:
             data.append(row)
-            
+
+        if len(data) == 0:
+            return json.dumps({"result":"login Failed", "message":"invalid credentials"})
+
         payload = {"email":request.json["email"], "password":request.json["password"], "role":data[0][1], "id":data[0][0]}
         key = "secret"
         encoded = jwt.encode(payload, key).decode()
 
-        if len(data) == 0:
-            return json.dumps({"result":"login Failed", "message":"invalid credentials"})
-        
         return json.dumps({"result":"login successful", "auth_token":encoded})
     
 @user.route('/add_address', methods=["POST"])
