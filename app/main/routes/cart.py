@@ -29,3 +29,21 @@ def displayCart():
 
     return {"products":products, "total price":total_price}
 
+@cart.route('/add/<prod_id>', methods=["POST"])
+def addToCart(prod_id):
+    ''' user is present and product is already added -> increase qty by one
+        user is present but not product -> take cart id and add product to cart details table
+        user is not present -> add user and product ''' 
+
+    res = validate(request.json["auth_token"])
+    if not res[0]:
+        return json.dumps(res[1])
+
+    user_id = res[1]
+    
+    for instance in db.session.query(ProductModel).filter_by(id=prod_id):
+        prod_name = instance.name
+        prod_price = instance.price
+
+    
+    
